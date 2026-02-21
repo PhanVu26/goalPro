@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>GoalPro — Personal Goal Manager (iPhone 11+)</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell" role="application" aria-label="GoalPro - Personal Goal Manager">
+  <header class="app-header">
+    <div>
+      <div class="title">GoalPro</div>
+      <div class="sub" id="sub-info">Organize goals — small → big</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="btn" id="btn-backup" title="Export backup">Export</button>
+      <button class="btn" id="btn-new">+ New</button>
+    </div>
+  </header>
+
+  <main class="content" id="main">
+    <div class="controls">
+      <div class="search" role="search" aria-label="Search goals">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"></path><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.6"></circle></svg>
+        <input id="q" placeholder="Search goals or tasks..." aria-label="search input" />
+      </div>
+      <button class="btn" id="btn-filter" title="Filters">Filter</button>
+    </div>
+
+    <div class="panel" aria-hidden="false">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-weight:700">Categories</div>
+        <button class="btn" id="btn-add-cat">+ Add</button>
+      </div>
+      <div class="categories" id="categories"></div>
+    </div>
+
+    <section class="panel" aria-labelledby="goals-heading">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div><strong id="goals-heading">Your Goals</strong></div>
+        <div class="pill" id="stats">0 goals</div>
+      </div>
+      <div class="list" id="goalsList" aria-live="polite"></div>
+    </section>
+
+  </main>
+
+  <footer class="app-tab" role="navigation">
+    <div class="tab-btn" id="tab-all">All</div>
+    <div class="tab-btn" id="tab-today">Today</div>
+    <div class="tab-btn" id="tab-completed">Done</div>
+  </footer>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal" id="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <strong id="modalTitle">Create Goal</strong>
+      <button class="btn" id="modalClose">Close</button>
+    </div>
+
+    <div>
+      <label for="m-title">Title</label>
+      <input id="m-title" type="text" maxlength="120" placeholder="Enter a short title" />
+    </div>
+    <div style="margin-top:8px">
+      <label for="m-desc">Description (optional)</label>
+      <textarea id="m-desc" rows="3" placeholder="Write details..."></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <div style="flex:1">
+        <label for="m-cat">Category</label>
+        <select id="m-cat"></select>
+      </div>
+      <div style="width:110px">
+        <label for="m-pri">Priority</label>
+        <select id="m-pri">
+          <option value="1">High</option>
+          <option value="2" selected>Medium</option>
+          <option value="3">Low</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <div style="flex:1">
+        <label for="m-dead">Deadline</label>
+        <input id="m-dead" type="date" />
+      </div>
+      <div style="width:120px">
+        <label for="m-time">Time</label>
+        <input id="m-time" type="time"/>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+      <button class="btn" id="modalSave">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- snackbar -->
+<div class="snackbar" id="snackbar" role="status" aria-live="polite"></div>
+
+<input id="fileInput" type="file" accept="application/json" class="hidden" />
+
+<script src="app.js" defer></script>
+</body>
+</html>
